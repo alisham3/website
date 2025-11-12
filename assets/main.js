@@ -17,6 +17,39 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 	});
+
+	// Hamburger menu toggle
+	const hamburger = document.querySelector(".hamburger");
+	const mobileNav = document.querySelector(".mobile-nav");
+	
+	if (hamburger && mobileNav) {
+		hamburger.addEventListener("click", (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			hamburger.classList.toggle("active");
+			mobileNav.classList.toggle("active");
+			document.body.style.overflow = mobileNav.classList.contains("active") ? "hidden" : "";
+		});
+
+		// Close menu when clicking a link
+		const navLinks = document.querySelectorAll(".mobile-nav .nav-link");
+		navLinks.forEach(link => {
+			link.addEventListener("click", () => {
+				hamburger.classList.remove("active");
+				mobileNav.classList.remove("active");
+				document.body.style.overflow = "";
+			});
+		});
+
+		// Close menu when clicking outside
+		mobileNav.addEventListener("click", (e) => {
+			if (e.target === mobileNav) {
+				hamburger.classList.remove("active");
+				mobileNav.classList.remove("active");
+				document.body.style.overflow = "";
+			}
+		});
+	}
 });
 
 
